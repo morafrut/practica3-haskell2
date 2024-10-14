@@ -35,10 +35,12 @@ eliminarIndice (Node x rest) n =
     else Node x (eliminarIndice rest (n-1))
 
 insertarIndice :: List a -> Int -> a -> List a
-insertarIndice Void 0 nuevoElem = Node nuevoElem Void
-insertarIndice Void _ _ = error "Índice fuera del rango permitido."
+insertarIndice Void n nuevoElem =
+    if n == 0
+    then Node nuevoElem Void
+    else error "indice fuera del rango permitido" 
 insertarIndice (Node x rest) 0 nuevoElem = Node nuevoElem (Node x rest)
-insertarIndice (Node x rest) n = 
+insertarIndice (Node x rest) n  nuevoElem = 
     if n < 0 || n > longitud (Node x rest)
     then error "Índice fuera del rango permitido."
     else Node x (insertarIndice rest (n-1) nuevoElem)
